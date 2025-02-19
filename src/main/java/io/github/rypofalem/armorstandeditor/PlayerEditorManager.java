@@ -472,9 +472,11 @@ public class PlayerEditorManager implements Listener {
             pe.equipMenu.equipArmorstand();
 
             // Remove the In Use Lock
-            team = plugin.scoreboard.getTeam(plugin.inUseTeam);
-            if (team != null) {
-                team.removeEntry(pe.armorStandInUseId.toString());
+            if(!Scheduler.isFolia()){
+                team = plugin.scoreboard.getTeam(plugin.inUseTeam);
+                if (team != null) {
+                    team.removeEntry(pe.armorStandInUseId.toString());
+                }
             }
         }
     }
