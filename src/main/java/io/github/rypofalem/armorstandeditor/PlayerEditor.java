@@ -228,19 +228,26 @@ public class PlayerEditor {
 
         // Dont allow Editing the ArmorStand if the Stand is on the AS-InUse Team
         // Means No 2 Players can edit the Equipment at the same time
-        team = plugin.scoreboard.getTeam(plugin.inUseTeam);
-        armorStandInUseId = armorStand.getUniqueId();
-
-        debug.log("Is ArmorStand currently in use by another player?: " + team.hasEntry(armorStandInUseId.toString()));
-
-        if(team != null && !team.hasEntry(armorStandInUseId.toString())){
-            debug.log("ArmorStand Not on a Team and Player '" + getPlayer().getDisplayName() + "' has triggered to Open the Equipment Menu, Adding to In Use Team");
-            team.addEntry(armorStandInUseId.toString());
-            getPlayer().closeInventory();
-            equipMenu = new EquipmentMenu(this, armorStand);
-            equipMenu.openMenu();
-        } else {
-            sendMessage("asinuse", "warn");
+        if(!plugin.hasFolia){
+            team = plugin.scoreboard.getTeam(plugin.inUseTeam);
+            armorStandInUseId = armorStand.getUniqueId();
+    
+            debug.log("Is ArmorStand currently in use by another player?: " + team.hasEntry(armorStandInUseId.toString()));
+    
+            if(team != null && !team.hasEntry(armorStandInUseId.toString())){
+                debug.log("ArmorStand Not on a Team and Player '" + getPlayer().getDisplayName() + "' has triggered to Open the Equipment Menu, Adding to In Use Team");
+                team.addEntry(armorStandInUseId.toString());
+                getPlayer().closeInventory();
+                equipMenu = new EquipmentMenu(this, armorStand);
+                equipMenu.openMenu();
+            } else {
+                sendMessage("asinuse", "warn");
+            }
+        } else { 
+                debug.log("ArmorStand Not on a Team and Player '" + getPlayer().getDisplayName() + "' has triggered to Open the Equipment Menu. Folia.");
+                getPlayer().closeInventory();
+                equipMenu = new EquipmentMenu(this, armorStand);
+                equipMenu.openMenu();
         }
     }
 
