@@ -59,11 +59,14 @@ public class EquipmentMenu {
         ItemStack feetsies = equipment.getBoots();
         ItemStack rightHand = equipment.getItemInMainHand();
         ItemStack leftHand = equipment.getItemInOffHand();
+        equipment.clear();
+        
         ItemStack disabledIcon = new ItemStack(Material.BARRIER);
         ItemMeta meta = disabledIcon.getItemMeta();
         meta.setDisplayName(pe.plugin.getLang().getMessage("disabled", "warn")); //equipslot.msg <option>
         meta.getPersistentDataContainer().set(pe.plugin.getIconKey(), PersistentDataType.STRING, "ase icon"); // mark as icon
         disabledIcon.setItemMeta(meta);
+
 
         ItemStack helmetIcon = createIcon(Material.LEATHER_HELMET, "helm");
         ItemStack chestIcon = createIcon(Material.LEATHER_CHESTPLATE, "chest");
