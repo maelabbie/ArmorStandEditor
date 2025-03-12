@@ -24,14 +24,6 @@ jobs:
         with:
           java-version: ${{ matrix.java }}
           distribution: 'zulu'
-
-      # 3. Setup local Maven package cache to speed up building
-      - name: Cache SonarCloud packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
           
       - name: Cache Maven packages
         uses: actions/cache@v4
@@ -44,8 +36,7 @@ jobs:
       - name: Build and analyze
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=wolfieheart_ArmorStandEditor
+        run: mvn -B package --file pom.xml
 
       #5: Create a Clean Package - and Verify it
       - name: Clean package
