@@ -424,7 +424,7 @@ public class PlayerEditorManager implements Listener {
             if (item != null && item.hasItemMeta()) {
                 Player player = (Player) e.getWhoClicked();
                 String command = item.getItemMeta().getPersistentDataContainer().get(plugin.getIconKey(), PersistentDataType.STRING);
-                if (command != null && command.equals("")) {
+                if (command != null && command.equals("ase ")) {
                     return;
                 } else if (command != null) {
                     player.performCommand(command);
